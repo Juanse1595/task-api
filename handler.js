@@ -12,7 +12,7 @@ const serverless = require("serverless-http");
 
 const app = express();
 
-const USERS_TABLE = process.env.USERS_TABLE;
+const TASKS_TABLE = process.env.TASKS_TABLE;
 const client = new DynamoDBClient();
 const docClient = DynamoDBDocumentClient.from(client);
 
@@ -20,11 +20,11 @@ app.use(express.json());
 
 app.get("/", getHelloWorld)
 
-app.get("/users/:userId", async (req, res) => {
+app.get("/tasks/:taskId", async (req, res) => {
   const params = {
-    TableName: USERS_TABLE,
+    TableName: TASKS_TABLE,
     Key: {
-      userId: req.params.userId,
+      taskId: req.params.taskId,
     },
   };
 
@@ -32,39 +32,39 @@ app.get("/users/:userId", async (req, res) => {
     const command = new GetCommand(params);
     const { Item } = await docClient.send(command);
     if (Item) {
-      const { userId, name } = Item;
-      res.json({ userId, name });
+      const { taskId, name } = Item;
+      res.json({ taskId, name });
     } else {
       res
         .status(404)
-        .json({ error: 'Could not find user with provided "userId"' });
+        .json({ error: 'Could not find task with provided "taskId"' });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Could not retrieve user" });
+    res.status(500).json({ error: "Could not retrieve task" });
   }
 });
 
-app.post("/users", async (req, res) => {
-  const { userId, name } = req.body;
-  if (typeof userId !== "string") {
-    res.status(400).json({ error: '"userId" must be a string' });
+app.post("/tasks", async (req, res) => {
+  const { taskId, name } = req.body;
+  if (typeof taskId !== "string") {
+    res.status(400).json({ error: '"taskId" must be a string' });
   } else if (typeof name !== "string") {
     res.status(400).json({ error: '"name" must be a string' });
   }
 
   const params = {
-    TableName: USERS_TABLE,
-    Item: { userId, name },
+    TableName: TASKS_TABLE,
+    Item: { taskId, name },
   };
 
   try {
     const command = new PutCommand(params);
     await docClient.send(command);
-    res.json({ userId, name });
+    res.json({ taskId, name });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Could not create user" });
+    res.status(500).json({ error: "Could not create task" });
   }
 });
 
