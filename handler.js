@@ -1,4 +1,5 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { getHelloWorld } = require("./handlers/getHelloWorld.handler.js");
 
 const {
   DynamoDBDocumentClient,
@@ -16,6 +17,8 @@ const client = new DynamoDBClient();
 const docClient = DynamoDBDocumentClient.from(client);
 
 app.use(express.json());
+
+app.get("/", getHelloWorld)
 
 app.get("/users/:userId", async (req, res) => {
   const params = {
