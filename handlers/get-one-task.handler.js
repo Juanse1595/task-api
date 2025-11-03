@@ -1,3 +1,4 @@
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const {
   DynamoDBDocumentClient,
   GetCommand
@@ -19,8 +20,8 @@ const getOneTask = async (req, res) => {
     const command = new GetCommand(params);
     const { Item } = await docClient.send(command);
     if (Item) {
-      const { taskId, name } = Item;
-      res.json({ taskId, name });
+      const { taskId, title, completed, createdAt } = Item;
+      res.json({ taskId, title, completed, createdAt });
     } else {
       res
         .status(404)

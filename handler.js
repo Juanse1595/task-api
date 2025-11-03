@@ -1,5 +1,4 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { getHelloWorld } = require("./handlers/getHelloWorld.handler.js");
+const { getHelloWorld } = require("./handlers/get-hello-world.handler.js");
 const { getOneTask } = require("./handlers/get-one-task.handler.js");
 const express = require("express");
 const serverless = require("serverless-http");

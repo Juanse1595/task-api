@@ -44,10 +44,10 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: taskId
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: taskId
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${param:tableName}

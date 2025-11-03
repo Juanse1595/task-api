@@ -1,20 +1,20 @@
-const { PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const {
   DynamoDBDocumentClient,
   PutCommand,
 } = require("@aws-sdk/lib-dynamodb");
+const crypto = require('crypto')
 
 const TASKS_TABLE = process.env.TASKS_TABLE;
 const client = new DynamoDBClient();
 const docClient = DynamoDBDocumentClient.from(client);
 
 const createTask = async (req, res) => {
-  const { taskId, title } = req.body;
-  if (typeof taskId !== "string") {
-    res.status(400).json({ error: '"taskId" must be a string' });
-  } else if (typeof title !== "string") {
+  const { title } = req.body;
+  if (typeof title !== "string") {
     res.status(400).json({ error: '"title" must be a string' });
   }
+  const taskId = crypto.randomUUID()
 
   const params = {
     TableName: TASKS_TABLE,
