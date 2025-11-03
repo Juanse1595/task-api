@@ -3,7 +3,7 @@ const {
   DynamoDBDocumentClient,
   PutCommand,
 } = require("@aws-sdk/lib-dynamodb");
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 const TASKS_TABLE = process.env.TASKS_TABLE;
 const client = new DynamoDBClient();

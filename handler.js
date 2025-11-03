@@ -9,9 +9,9 @@ const deleteTask = require("./handlers/delete-task.handler.js");
 
 const app = express();
 
-
 app.use(express.json());
 
+app.get("/health", getHelloWorld);
 
 app.get("/tasks", getAllTasks);
 app.get("/tasks/:taskId", getOneTask);
@@ -22,10 +22,8 @@ app.put("/tasks/:taskId", updateTask);
 
 app.delete("/tasks/:taskId", deleteTask);
 
-// Route to check api health
-app.get("/health", getHelloWorld)
-
-app.use((req, res, next) => {
+// Catch-all 404 handler - place at the end
+app.use((req, res) => {
   return res.status(404).json({
     error: "Not Found",
   });

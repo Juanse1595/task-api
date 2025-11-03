@@ -1,7 +1,7 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const {
   DynamoDBDocumentClient,
-  GetCommand
+  GetCommand,
 } = require("@aws-sdk/lib-dynamodb");
 
 const TASKS_TABLE = process.env.TASKS_TABLE;
@@ -34,5 +34,5 @@ const getOneTask = async (req, res) => {
 }
 
 module.exports = {
-  getOneTask
-}
+  getOneTask,
+};
