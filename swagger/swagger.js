@@ -182,6 +182,65 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "CreateTaskRequest": {
+      "properties": {
+        "title": {
+          "title": "CreateTaskRequest.title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false,
+      "title": "CreateTaskRequest",
+      "type": "object"
+    },
+    "UpdateTaskRequest": {
+      "properties": {
+        "title": {
+          "title": "UpdateTaskRequest.title",
+          "type": "string"
+        },
+        "completed": {
+          "title": "UpdateTaskRequest.completed",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "title": "UpdateTaskRequest",
+      "type": "object"
+    },
+    "TaskResponse": {
+      "properties": {
+        "taskId": {
+          "title": "TaskResponse.taskId",
+          "type": "string"
+        },
+        "title": {
+          "title": "TaskResponse.title",
+          "type": "string"
+        },
+        "completed": {
+          "title": "TaskResponse.completed",
+          "type": "boolean"
+        },
+        "createdAt": {
+          "title": "TaskResponse.createdAt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskId",
+        "title",
+        "completed",
+        "createdAt"
+      ],
+      "additionalProperties": false,
+      "title": "TaskResponse",
+      "type": "object"
+    }
+  },
   "securityDefinitions": {}
 };

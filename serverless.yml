@@ -11,6 +11,10 @@ plugins:
 custom:
   autoswagger:
     title: 'Task API'
+    apiType: 'httpApi'
+    generateSwaggerOnDeploy: true
+    typefiles:
+      - './src/types/api-types.d.ts'
 
 stages:
   default:
